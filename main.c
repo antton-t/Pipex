@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:18:06 by antton-t          #+#    #+#             */
-/*   Updated: 2021/10/16 16:59:23 by antton-t         ###   ########.fr       */
+/*   Updated: 2021/10/16 19:00:36 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char ** argv, char ** env)
 	if (argc == 5)
 	{
 		pipex.fd_parent = open(argv[1], O_RDONLY);
-		pipex.fd_child = open(argv[3], O_CREAT | O_RDWR | O_TRUNC, 0644);
+		pipex.fd_child = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (pipex.fd_parent < 0 || pipex.fd_child < 0)
 			ft_open_error();
 		pipe(pipex.pipe_fd);
