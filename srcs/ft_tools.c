@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 12:55:26 by antton-t          #+#    #+#             */
-/*   Updated: 2021/10/18 14:25:36 by antton-t         ###   ########.fr       */
+/*   Updated: 2021/10/19 18:59:46 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_access_child(char *argv, t_pipex pipex)
 	while (pipex.cmd[i])
 	{
 		tmp = ft_strjoin(pipex.cmd[i], argv);
-		if (access(tmp, F_OK | X_OK) != -1)
+		if (access(tmp, F_OK) != -1)
 		{
 			pipex.path_child = tmp;;
 			return (1);
