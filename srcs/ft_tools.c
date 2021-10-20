@@ -40,7 +40,7 @@ void	ft_execve(t_pipex pipex, char **env, char *cmd, char **argv)
 		result = execve(ft_exact_path(cmd_tab[0], pipex), cmd_tab, env);
 		if (result == -1)
 		{
-			perror("command not found\n");
+			perror("command not found");
 		//	ft_free_pipex(pipex);
 			exit(1);
 		}
