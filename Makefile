@@ -10,10 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Pipex
+NAME = pipex
 CC = clang
 HEAD = -Iinclude -Ilibft
-CFLAGS = -Wall -Wextra 
+CFLAGS = -Wall -Wextra -g3 -fsanitize=address 
 
 FILES = main.c \
 		ft_tools.c \

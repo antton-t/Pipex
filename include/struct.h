@@ -17,12 +17,8 @@ typedef struct l_pipex
 {
 	int	fd_parent;
 	int	fd_child;
-	pid_t	pid;
 	int	pipe_fd[2];
 	char	**cmd;
-	char	*path_child;
-	char	*path_parent;
-	int	error;
 }				t_pipex;
 
 #endif

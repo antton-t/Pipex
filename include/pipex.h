@@ -25,3 +25,4 @@ void	ft_get_path(char **env, t_pipex *pipex);
 void	ft_pipex(t_pipex pipex, char **argv, char **env);
 int	ft_access_child(char *argv, t_pipex pipex);
 int	ft_access_parent(char *argv, t_pipex pipex);
+void	ft_execve(t_pipex pipex, char **env, char *cmd, char **argv);

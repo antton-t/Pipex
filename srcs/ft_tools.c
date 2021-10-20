@@ -12,52 +12,42 @@
 
 #include "pipex.h"
 
-int	ft_access_parent(char *argv, t_pipex pipex)
+char	*ft_exact_path(char *cmd, t_pipex pipex)
 {
-	int i;
-	char *tmp;
+	int	i;
+	char	*tmp;
 
 	i = 0;
 	while (pipex.cmd[i])
 	{
-		tmp = ft_strjoin(pipex.cmd[i], argv);
-		if (access(tmp, F_OK | X_OK) != -1)
+		tmp = ft_strjoin(pipex.cmd[i], cmd);
+		if (access(tmp, F_OK) == 0)
 		{
-			pipex.path_parent = tmp;;
-			return (1);
+			return (tmp);
 		}
-		else
-		{
-			free(tmp);
-			i++;
-		}
+		i++;
 	}
-	return (-1);
+	free(tmp);
+	return (NULL);
 }
-
-int	ft_access_child(char *argv, t_pipex pipex)
+void	ft_execve(t_pipex pipex, char **env, char *cmd, char **argv)
 {
-	int i;
-	char *tmp;
-
-	i = 0;
-	while (pipex.cmd[i])
+	char	**cmd_tab;
+	int	result;
+	if (*cmd)
 	{
-		tmp = ft_strjoin(pipex.cmd[i], argv);
-		if (access(tmp, F_OK) != -1)
+		cmd_tab = ft_split(cmd, ' ');
+		result = execve(ft_exact_path(cmd_tab[0], pipex), cmd_tab, env);
+		if (result == -1)
 		{
-			pipex.path_child = tmp;;
-			return (1);
-		}
-		else
-		{
-			free(tmp);
-			i++;
+			perror("command not found\n");
+		//	ft_free_pipex(pipex);
+			exit(1);
 		}
 	}
-	return (-1);
+//	ft_free_pipex(pipex);
+	exit(1);
 }
-
 void	ft_get_cmd(char *str, t_pipex *pipex)
 {
 	int	i;

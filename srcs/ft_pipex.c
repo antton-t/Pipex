@@ -12,64 +12,50 @@
 
 #include "pipex.h"
 
-void	ft_pipex_child(t_pipex pipex, char *cmd, char **env, char **argv)
+void	ft_pipex_parent(t_pipex pipex, char *cmd, char **env, char **argv)
 {
-	char	*str;
-	char	**cmd_final;
-
-	cmd_final = ft_split(cmd, ' ');
-	pipex.fd_child = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-//	dup2(pipex.fd_child, STDIN_FILENO);
-	dup2(pipex.pipe_fd[1], STDOUT_FILENO);
-	close(pipex.pipe_fd[0]);
-	close(pipex.fd_child);
-//	if (execve(ft_exec_path(pipex, cmd), cmd_final, env) == -1)
+	pipex.fd_parent = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (pipex.fd_parent >= 0)
 	{
-		str = ft_strjoin("command not found ", "\n");
-		write(1, "str", ft_strlen(str));
-		free(str);
-		if (pipex.error == 1)
-		{
-			//ft_free_pipex(pipex);
-			exit(1);
-		}
+		dup2(pipex.pipe_fd[0], 1);
+		close(pipex.pipe_fd[0]);
+		dup2(pipex.fd_parent, 2);
+		close(pipex.fd_parent);
+		ft_execve(pipex, env, cmd, argv);
 	}
-//	execve(pipex.path_child, ft_split(argv[3], ' '), env);
-}
-
-void	ft_pipex_parent(t_pipex pipex, char **argv, char **env)
-{
-	int	status;
-	char	*str;
-
-	dup2(pipex.pipe_fd[0], STDIN_FILENO);
-	close(pipex.pipe_fd[1]);
-	close(pipex.fd_parent);
-	if (ft_access_parent(argv[2], pipex) == -1)
+	else
 	{
-		str = ft_strjoin("command not found ", argv[3]);
-		write(1, "str", ft_strlen(str));
-		write(1, "\n", 1);
-		free(str);
-		//ft_free_pipex(pipex);
+	//	ft_free_pipex(pipex);
 		exit(1);
 	}
-//	execve(pipex.path_parent, ft_split(argv[2], ' '), env);
+}
+
+void	ft_pipex_child(t_pipex pipex, char *cmd, char **env, char **argv)
+{
+	dup2(pipex.fd_child, 1);
+	close(pipex.fd_child);
+	dup2(pipex.pipe_fd[1], 2);
+	close(pipex.pipe_fd[1]);
+	ft_execve(pipex, env, cmd, argv);
 }
 
 void	ft_pipex(t_pipex pipex, char **argv, char **env)
 {
-//	pipex.pid = fork();
+
 	ft_get_path(env, &pipex);
-/*	if (pipex.pid < 0)
+	if (fork() == 0)
 	{
-		return (perror("Fork Error"));
-		//ft_free_pipex(pipex);
-		exit(1);
+	//	close(pipex.pipe_fd[0]);
+		ft_pipex_child(pipex, argv[2], env, argv);
 	}
-	if (pipex.pid == 0)
-		ft_pipex_child(pipex, argv[3], env, argv);
 	else
-		ft_pipex_parent(pipex, argv[2], env);
-*/
+	{
+	//	close(pipex.pipe_fd[1]);
+		ft_pipex_parent(pipex, argv[3], env, argv);
+	}
 }
+
+//void	ft_free_pipex(t_pipex pipex)
+//{
+	
+//}

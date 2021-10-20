@@ -22,11 +22,12 @@ int	main(int argc, char ** argv, char ** env)
 {
 	t_pipex	pipex;
 
-	if (argc == 5 && pipe(pipex.pipe_fd) >= 0)
+	if (argc == 5 || pipe(pipex.pipe_fd) >= 0)
 	{
-		pipex.fd_parent = open(argv[1], O_RDONLY);
-		if (pipex.fd_parent < 0)
+		pipex.fd_child = open(argv[1], O_RDONLY);
+		if (pipex.fd_child < 0)
 		{
+			close(pipex.fd_parent);
 			write(1, "No such file or directory\n", 26);
 			exit(1);
 		}
