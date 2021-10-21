@@ -41,11 +41,11 @@ void	ft_execve(t_pipex pipex, char **env, char *cmd, char **argv)
 		if (result == -1)
 		{
 			perror("command not found");
-		//	ft_free_pipex(pipex);
+			ft_free_pipex(pipex);
 			exit(1);
 		}
 	}
-//	ft_free_pipex(pipex);
+	ft_free_pipex(pipex);
 	exit(1);
 }
 void	ft_get_cmd(char *str, t_pipex *pipex)

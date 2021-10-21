@@ -25,7 +25,7 @@ void	ft_pipex_parent(t_pipex pipex, char *cmd, char **env, char **argv)
 	}
 	else
 	{
-	//	ft_free_pipex(pipex);
+		ft_free_pipex(pipex);
 		exit(1);
 	}
 }
@@ -54,8 +54,3 @@ void	ft_pipex(t_pipex pipex, char **argv, char **env)
 		ft_pipex_parent(pipex, argv[3], env, argv);
 	}
 }
-
-//void	ft_free_pipex(t_pipex pipex)
-//{
-	
-//}

@@ -18,6 +18,7 @@ CFLAGS = -Wall -Wextra -g3 -fsanitize=address
 FILES = main.c \
 		ft_tools.c \
 		ft_pipex.c \
+		ft_free_pipex.c \
 
 SRC_PATH = $(shell find srcs -type d)
 vpath %.c $(foreach dir, $(SRC_PATH), $(dir))
