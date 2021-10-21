@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 12:03:06 by antton-t          #+#    #+#             */
-/*   Updated: 2021/10/19 19:25:21 by antton-t         ###   ########.fr       */
+/*   Updated: 2021/10/21 11:48:32 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_pipex_child(t_pipex pipex, char *cmd, char **env, char **argv)
 
 void	ft_pipex(t_pipex pipex, char **argv, char **env)
 {
-
 	ft_get_path(env, &pipex);
 	if (fork() == 0)
 	{
