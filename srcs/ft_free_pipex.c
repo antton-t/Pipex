@@ -6,11 +6,11 @@
 /*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 11:49:03 by antton-t          #+#    #+#             */
-/*   Updated: 2021/10/21 11:50:57 by antton-t         ###   ########.fr       */
+/*   Updated: 2021/10/22 19:17:33 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	ft_free_pipex(t_pipex pipex)
 {
@@ -26,5 +26,17 @@ void	ft_free_pipex(t_pipex pipex)
 		}
 		free(pipex.cmd);
 	}
-	return ;
+}
+
+void	ft_free_cmd(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

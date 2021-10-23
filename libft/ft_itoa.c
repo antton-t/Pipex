@@ -3,53 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/03 15:05:35 by antton-t          #+#    #+#             */
-/*   Updated: 2020/05/03 15:05:39 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:51:30 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:51:32 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_iintlen(long n)
-{
-	int				count;
-
-	count = 0;
-	if (n == 0)
-		return (1);
-	count = (n < 0 ? 1 : 0);
-	n = (n < 0 ? -n : n);
-	while (n > 0)
-	{
-		n = n / 10;
-		count++;
-	}
-	return (count);
-}
-
 char	*ft_itoa(int n)
 {
-	int				sign;
-	char			*out;
-	int				len;
-	unsigned int	nbr;
+	int				i;
+	int				l;
+	unsigned int	sup;
+	char			*s;
 
-	sign = (n < 0 ? 1 : 0);
-	len = ft_iintlen((long)n);
-	nbr = (n < 0 ? -n : n);
-	if (!(out = (char *)malloc(sizeof(char) * (len + 1))))
+	l = ft_lengthnumb(n);
+	s = (char *)ft_calloc(sizeof(char), l + 1);
+	if (!s)
 		return (NULL);
-	out[len] = '\0';
-	len--;
-	while (len >= 0)
+	if (n < 0)
 	{
-		out[len] = nbr % 10 + '0';
-		nbr = nbr / 10;
-		len--;
+		s[0] = '-';
+		sup = -1 * n;
 	}
-	if (sign == 1)
-		out[0] = '-';
-	return (out);
+	else
+		sup = n;
+	i = 1;
+	while (i <= l && s[l - i] != '-')
+	{
+		s[l - i] = sup % 10 + 48;
+		sup = sup / 10;
+		i++;
+	}
+	return (s);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 04:48:58 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/27 05:14:33 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:57:01 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:57:02 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
-	i = 0;
 	if (!s)
 		return ;
+	i = 0;
 	while (s[i])
 	{
 		ft_putchar_fd(s[i], fd);

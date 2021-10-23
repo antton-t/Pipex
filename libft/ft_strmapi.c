@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 04:47:16 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/27 07:08:08 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:59:14 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:59:16 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	unsigned int	i;
-	char			*out;
+	unsigned int	l;
+	char			*sol;
 
-	i = 0;
 	if (!s)
 		return (NULL);
-	out = ft_strdup(s);
-	if (!out || !f)
+	l = ft_strlen(s);
+	sol = (char *)ft_calloc(sizeof(char), (l + 1));
+	if (sol == NULL)
 		return (NULL);
-	while (out[i])
+	i = 0;
+	while (i < l)
 	{
-		out[i] = f(i, s[i]);
+		sol[i] = f(i, s[i]);
 		i++;
 	}
-	return (out);
+	return (sol);
 }

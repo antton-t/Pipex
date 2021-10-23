@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/22 22:33:49 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/29 19:29:55 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 20:00:03 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 20:00:04 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*out;
-	char	*ptr_out;
+	size_t	i;
+	char	*sub;
 
-	if (!s || (long int)len < 0)
+	if (!s)
 		return (NULL);
-	if (!(out = (char*)malloc(sizeof(char) * (len + 1))))
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (sub == NULL)
 		return (NULL);
-	ptr_out = out;
-	if (ft_strlen(s) > start)
+	i = 0;
+	while (i < len && start + i < ft_strlen(s))
 	{
-		while (len-- && s[start])
-			*ptr_out++ = s[start++];
+		sub[i] = s[start + i];
+		i++;
 	}
-	*ptr_out = '\0';
-	return (out);
+	sub[i] = 0;
+	return (sub);
 }

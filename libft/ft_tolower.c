@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/22 21:18:47 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/22 22:02:29 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 20:00:23 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 20:00:24 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ int	ft_tolower(int c)
 {
 	if (c > 64 && c < 91)
 		return (c + 32);
-	return (c);
+	else
+		return (c);
 }

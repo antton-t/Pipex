@@ -6,7 +6,7 @@
 /*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:59:18 by antton-t          #+#    #+#             */
-/*   Updated: 2021/10/18 16:45:07 by antton-t         ###   ########.fr       */
+/*   Updated: 2021/10/21 12:01:01 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct l_pipex
 {
-	int	fd_parent;
-	int	fd_child;
-	int	pipe_fd[2];
+	int		fd_parent;
+	int		fd_child;
+	int		pipe_fd[2];
 	char	**cmd;
 }				t_pipex;
 

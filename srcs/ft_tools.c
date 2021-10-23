@@ -6,11 +6,12 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 12:55:26 by antton-t          #+#    #+#             */
-/*   Updated: 2021/10/21 11:50:51 by antton-t         ###   ########.fr       */
+/*   Updated: 2021/10/22 19:18:17 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
+#include "../include/libft.h"
 
 char	*ft_exact_path(char *cmd, t_pipex pipex)
 {
@@ -25,35 +26,30 @@ char	*ft_exact_path(char *cmd, t_pipex pipex)
 		{
 			return (tmp);
 		}
+		free(tmp);
 		i++;
 	}
-	free(tmp);
 	return (NULL);
 }
 
-void	ft_execve(t_pipex pipex, char **env, char *cmd, char **argv)
+void	ft_execve(t_pipex pipex, char **cmd)
 {
-	char	**cmd_tab;
 	int		result;
 
-	if (*cmd)
+	result = execve(ft_exact_path(cmd[0], pipex), cmd, NULL);
+	if (result == -1)
 	{
-		cmd_tab = ft_split(cmd, ' ');
-		result = execve(ft_exact_path(cmd_tab[0], pipex), cmd_tab, env);
-		if (result == -1)
-		{
-			perror("command not found");
-			ft_free_pipex(pipex);
-			exit(1);
-		}
+		perror("command not found");
 	}
+	ft_free_cmd(cmd);
 	ft_free_pipex(pipex);
-	exit (1);
+	exit(1);
 }
 
 void	ft_get_cmd(char *str, t_pipex *pipex)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (*str != '/')
@@ -61,7 +57,9 @@ void	ft_get_cmd(char *str, t_pipex *pipex)
 	pipex->cmd = ft_split(str, ':');
 	while (pipex->cmd[i])
 	{
+		tmp = pipex->cmd[i];
 		pipex->cmd[i] = ft_strjoin(pipex->cmd[i], "/");
+		free(tmp);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 14:41:42 by antton-t          #+#    #+#             */
-/*   Updated: 2020/05/01 04:46:36 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:54:13 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:54:15 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t				i;
-	unsigned	char	*ptr_src;
-	unsigned	char	*ptr_dst;
+	size_t	i;
+	size_t	ol;
 
+	ol = 0;
 	i = 0;
-	ptr_src = (unsigned char *)src;
-	ptr_dst = (unsigned char *)dst;
-	if (!ptr_dst && !ptr_src)
-		return (NULL);
-	if (ptr_src > ptr_dst)
+	while (i < len)
 	{
-		while (i < len)
-		{
-			ptr_dst[i] = ptr_src[i];
-			i++;
-		}
-		return (dst);
+		if (dst == src + i)
+			ol = i;
+		i++;
 	}
-	else
+	if (ol == 0)
+		return (ft_memcpy(dst, src, len));
+	i = 0;
+	while (i < len)
 	{
-		while (len-- > 0)
-			ptr_dst[len] = ptr_src[len];
-		return (dst);
+		*(char *)(dst + len - 1 - i) = *(char *)(src + len - 1 - i);
+		i++;
 	}
+	return (dst);
 }

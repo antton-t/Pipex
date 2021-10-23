@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_countstrings.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 04:57:31 by antton-t          #+#    #+#             */
-/*   Updated: 2020/05/03 09:32:12 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:50:02 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:50:03 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_countstrings(char const *s, char c)
 {
-	t_list *tmp;
+	int		count;
+	int		i;
 
-	tmp = NULL;
-	if (lst && f)
+	count = 0;
+	i = 0;
+	if (s[i] != c && s[i] != 0)
+		count++;
+	while (s[i])
 	{
-		tmp = lst;
-		while (tmp->next != NULL)
+		while (s[i] == c && s[i + 1] != 0)
 		{
-			f(tmp->content);
-			tmp = tmp->next;
+			if (s[i + 1] != c && s[i + 1] != 0)
+				count++;
+			i++;
 		}
-		f(tmp->content);
+		i++;
 	}
+	return (count);
 }

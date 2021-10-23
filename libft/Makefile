@@ -1,84 +1,97 @@
-NAME = libft.a
-HEAD := -I .
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: antton-t <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/09/23 20:13:40 by antton-t          #+#    #+#              #
+#    Updated: 2021/09/23 20:13:42 by antton-t         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror
+NAME := libft.a
 
-BNS := \
-	ft_lstmap.c \
-	ft_lstiter.c \
-	ft_lstclear.c \
-	ft_lstlast.c \
-	ft_lstdelone.c \
-	ft_lstsize.c \
-	ft_lstadd_back.c \
-	ft_lstadd_front.c \
-	ft_lstnew.c \
+OBJS := \
+	ft_memset.o \
+	ft_putchar_fd.o \
+	ft_putendl_fd.o \
+	ft_putnbr_fd.o \
+	ft_putstr_fd.o \
+	ft_strlcat.o \
+	ft_strlcpy.o \
+	ft_strlen.o \
+	ft_strchr.o \
+	ft_strrchr.o \
+	ft_strncmp.o \
+	ft_atoi.o \
+	ft_isdigit.o \
+	ft_isspace.o \
+	ft_strnstr.o \
+	ft_isalpha.o \
+	ft_isalnum.o \
+	ft_isascii.o \
+	ft_isprint.o \
+	ft_toupper.o \
+	ft_tolower.o \
+	ft_bzero.o \
+	ft_memcpy.o \
+	ft_memccpy.o \
+	ft_memmove.o \
+	ft_memchr.o \
+	ft_memcmp.o \
+	ft_calloc.o \
+	ft_strdup.o \
+	ft_substr.o \
+	ft_strjoin.o \
+	ft_isinstr.o \
+	ft_strtrim.o \
+	ft_countstrings.o \
+	ft_doingmalloc.o \
+	ft_split.o \
+	ft_lengthnumb.o \
+	ft_itoa.o \
+	ft_strmapi.o \
+	ft_fillstr.o \
+	ft_doingfree.o \
+	ft_printf.o \
+	ft_printf_utils.o \
+	ft_printing_types.o \
+	ft_printing_type_uint.o \
+	ft_printing_type_point.o \
+	ft_printing_type_int.o \
+	ft_printing_type_hex.o \
+	ft_strcmp.o
 
-SRC := \
-	ft_memset.c \
-	ft_check_argv.c \
-	ft_swap.c \
-	ft_bzero.c \
-	ft_memcpy.c \
-	ft_memccpy.c \
-	ft_memmove.c \
-	ft_atof.c \
-	ft_atof_1.c \
-	ft_memchr.c \
-	ft_memcmp.c \
-	ft_strlen.c \
-	ft_get_next_line.c \
-	ft_isalpha.c \
-	ft_isdigit.c \
-	ft_rmv_tab.c \
-	ft_isalnum.c \
-	ft_isascii.c \
-	ft_isprint.c \
-	ft_toupper.c \
-	ft_tolower.c \
-	ft_strchr.c \
-	ft_strrchr.c \
-	ft_strncmp.c \
-	ft_strlcpy.c \
-	ft_strlcat.c \
-	ft_strnstr.c \
-	ft_atoi.c \
-	ft_atoi_1.c \
-	ft_atoi_count.c \
-	ft_intlength.c \
-	ft_doublength.c \
-	ft_calloc.c \
-	ft_strdup.c \
-	ft_substr.c \
-	ft_strjoin.c \
-	ft_strtrim.c \
-	ft_split.c \
-	ft_itoa.c \
-	ft_strmapi.c \
-	ft_putchar_fd.c \
-	ft_putstr_fd.c \
-	ft_putendl_fd.c \
-	ft_putnbr_fd.c \
-	ft_free_split.c \
+OBJB := \
+	ft_lstnew_bonus.o \
+	ft_lstadd_front_bonus.o \
+	ft_lstsize_bonus.o \
+	ft_lstlast_bonus.o \
+	ft_lstadd_back_bonus.o \
+	ft_lstdelone_bonus.o \
+	ft_lstclear_bonus.o \
+	ft_lstiter_bonus.o \
+	ft_lstmap_bonus.o \
 
-OBJS :=$(SRC:.c=.o)
-OBJB :=$(BNS:.c=.o)
+GFLAGS := -Wall -Werror -Wextra
+HEAD := headers
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	ar rc $(NAME) $(OBJS)
 
-bonus: $(OBJS) $(OBJB)
-	ar rcs $(NAME) $(OBJS) $(OBJB)
+bonus : $(OBJS) $(OBJB)
+	ar rc $(NAME) $(OBJB) $(OBJS)
 
 %.o: %.c
-	gcc $(CFLAGS) $(HEAD) -c $< -o $@
+	gcc $(GFLAGS) -I $(HEAD) -c $< -o $@
 
-clean:
-	rm -rf $(OBJS) $(OBJB)
+clean :
+	rm -f $(OBJS) $(OBJB)
 
-fclean:
-	rm -rf $(NAME) $(OBJS) $(OBJB)
+fclean : clean
+	rm -f $(NAME)
 
-re: fclean all
+re : fclean all

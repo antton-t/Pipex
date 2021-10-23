@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/22 05:29:40 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/29 19:26:49 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:59:31 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:59:33 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
 	size_t	i;
 	size_t	j;
 	size_t	l;
 
+	l = ft_strlen(needle);
 	i = 0;
 	j = 0;
-	l = ft_strlen(little);
-	while (big[i] && i < len && j < l)
+	while (haystack[i] && i < n && j < l)
 	{
 		j = 0;
-		while (big[i + j] == little[j] && i + j < len && big[i + j])
+		while (haystack[i + j] == needle[j] && i + j < n && haystack[i + j])
 			j++;
 		i++;
 	}
 	if (l == 0)
-		return ((char*)big);
+		return ((char *)haystack);
 	if (j == l)
-		return ((char*)big + i - 1);
+		return ((char *)haystack + i - 1);
 	return (NULL);
 }

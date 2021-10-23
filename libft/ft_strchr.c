@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 04:39:00 by antton-t          #+#    #+#             */
-/*   Updated: 2020/05/01 05:35:40 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:57:21 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:57:23 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	char	look;
-	int		len_str;
-	int		j;
+	int	i;
+	int	l;
 
-	j = 0;
-	len_str = ft_strlen(str);
-	look = (char)c;
-	while (j <= len_str)
+	l = ft_strlen(s);
+	i = 0;
+	while (i < l + 1)
 	{
-		if (str[j] == look)
-			return ((char *)str + j);
-		j++;
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
 	}
 	return (NULL);
 }

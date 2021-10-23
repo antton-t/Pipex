@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/29 16:03:36 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/29 16:04:14 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:53:58 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:54:00 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*tmp1;
-	unsigned char	*tmp2;
+	size_t	i;
+	int		dif;
 
-	tmp1 = (unsigned char*)s1;
-	tmp2 = (unsigned char*)s2;
+	dif = 0;
 	i = 0;
-	while (i < n && (tmp1 || tmp2))
+	if (s1 == NULL || s2 == NULL)
+		return (-1);
+	if (*(unsigned char *)s1 == 0 || *(unsigned char *)s2 == 0)
+		return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	while (i < n)
 	{
-		if (tmp1[i] != tmp2[i])
-			return (tmp1[i] - tmp2[i]);
+		if (*(unsigned char *)(s1 + i) != *(unsigned char *)(s2 + i))
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
 		i++;
 	}
-	return (0);
+	return (dif);
 }

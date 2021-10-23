@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_fillstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 04:55:58 by antton-t          #+#    #+#             */
-/*   Updated: 2020/05/03 11:36:54 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:50:27 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:50:28 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_fillstr(char **split, char const *s, char c)
 {
-	t_list	*tmp;
-	t_list	*tmp1;
+	int	count;
+	int	i;
+	int	j;
 
-	tmp = *lst;
-	while (tmp)
+	i = 0;
+	count = 0;
+	while (s[i])
 	{
-		tmp1 = tmp->next;
-		del(tmp->content);
-		free(tmp);
-		tmp = tmp1;
+		j = 0;
+		while (s[i] != c && s[i] != 0)
+			split[count][j++] = s[i++];
+		if (j != 0)
+		{
+			count++;
+			i--;
+		}
+		i++;
 	}
-	*lst = NULL;
 }

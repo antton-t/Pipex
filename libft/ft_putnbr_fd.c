@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antton-t <antton-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antton-t <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 04:50:44 by antton-t          #+#    #+#             */
-/*   Updated: 2020/04/27 06:20:59 by antton-t         ###   ########.fr       */
+/*   Created: 2021/09/23 19:56:03 by antton-t          #+#    #+#             */
+/*   Updated: 2021/09/23 19:56:04 by antton-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int	nb;
-
+	if (n == -2147483648)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		n = 147483648;
+	}
 	if (n < 0)
 	{
-		nb = (unsigned int)n * (-1);
 		ft_putchar_fd('-', fd);
+		n = -1 * n;
 	}
-	else
-		nb = (unsigned int)n;
-	if (nb >= 10)
-		ft_putnbr_fd(nb / 10, fd);
-	ft_putchar_fd(nb % 10 + '0', fd);
+	if (n < 10)
+		ft_putchar_fd(n + 48, fd);
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
 }
